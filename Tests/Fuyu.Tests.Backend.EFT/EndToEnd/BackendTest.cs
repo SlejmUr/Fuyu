@@ -317,7 +317,14 @@ public class BackendTest
     [TestMethod]
     public async Task TestClientGameProfileSelect()
     {
-        var response = await _eftMainClient.GetAsync("/client/game/profile/select");
+        var request = new GameProfileSelectRequest()
+        {
+            Uid = ""
+        };
+        var json = Json.Stringify(request);
+        var body = Encoding.UTF8.GetBytes(json);
+
+        var response = await _eftMainClient.PostAsync("/client/game/profile/select", body);
         var result = Encoding.UTF8.GetString(response.Body);
 
         Assert.IsFalse(string.IsNullOrEmpty(result));
@@ -335,7 +342,14 @@ public class BackendTest
     [TestMethod]
     public async Task TestClientGameVersionValidate()
     {
-        var response = await _eftMainClient.GetAsync("/client/game/version/validate");
+        var request = new GameVersionValidateRequest()
+        {
+
+        };
+        var json = Json.Stringify(request);
+        var body = Encoding.UTF8.GetBytes(json);
+
+        var response = await _eftMainClient.PostAsync("/client/game/version/validate", body);
         var result = Encoding.UTF8.GetString(response.Body);
 
         Assert.IsFalse(string.IsNullOrEmpty(result));

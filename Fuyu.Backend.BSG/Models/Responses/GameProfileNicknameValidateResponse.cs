@@ -1,4 +1,5 @@
 using System.Runtime.Serialization;
+using Fuyu.Backend.BSG.Models.Profiles;
 
 namespace Fuyu.Backend.BSG.Models.Responses;
 
@@ -6,5 +7,5 @@ namespace Fuyu.Backend.BSG.Models.Responses;
 public class GameProfileNicknameValidateResponse
 {
     [DataMember]
-    public string status { get; set; }
+    public ENicknameChangeResult status { get; set; }
 }

@@ -1,7 +1,8 @@
+using System;
 using System.Threading.Tasks;
+using Fuyu.Backend.BSG.Models.Requests;
 using Fuyu.Backend.BSG.Models.Responses;
 using Fuyu.Backend.EFTMain.Networking;
-using Fuyu.Common.Serialization;
 
 namespace Fuyu.Backend.EFTMain.Controllers.Http;
 
@@ -13,13 +14,11 @@ public class GameStartController : AbstractEftHttpController
 
     public override Task RunAsync(EftHttpContext context)
     {
-        // TODO: generate this
-        // --seionmoya, 2024-11-18
         var response = new ResponseBody<GameStartResponse>()
         {
             data = new GameStartResponse()
             {
-                utc_time = 1711579783.2164
+                BackendTime = DateTimeOffset.Now.ToUnixTimeMilliseconds()
             }
         };
 

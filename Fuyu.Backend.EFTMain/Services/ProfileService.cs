@@ -1,7 +1,10 @@
 using System;
+using System.Linq;
 using Fuyu.Backend.BSG.Models.Accounts;
 using Fuyu.Backend.BSG.Models.Profiles;
 using Fuyu.Backend.BSG.Models.Profiles.Info;
+using Fuyu.Backend.EFTMain.Configs;
+using Fuyu.Common.Config;
 using Fuyu.Common.Hashing;
 using Fuyu.Common.IO;
 using Fuyu.Common.Serialization;
@@ -113,7 +116,11 @@ public class ProfileService
     /// <returns>True if the nickname is valid</returns>
     public ENicknameChangeResult IsValidNickname(string nickname)
     {
+        var service = ConfigService.GetInstance("eft-main");
+        var nicknameConfig = service.GetOrCreate<NicknameConfig>("nickname_config");
+
         //TODO: Handle all results
+        // We dont handle NicknameTaken
         if (nickname.Length < 3)
         {
             return ENicknameChangeResult.TooShort;
@@ -122,6 +129,18 @@ public class ProfileService
         if (nickname.Length > 15)
         {
             return ENicknameChangeResult.CharacterLimit;
+        }
+
+        // select characters that has digits and checks if more than 4
+        if (nickname.Select(char.IsDigit).Count() > 4 )
+        {
+            return ENicknameChangeResult.DigitsLimit;
+        }
+
+        // checks if any of characters contains invalid symbol
+        if (nickname.Any(nicknameConfig.NicknameInvalidSymbols.Contains))
+        {
+            return ENicknameChangeResult.WrongSymbol;
         }
 
         return ENicknameChangeResult.Ok;

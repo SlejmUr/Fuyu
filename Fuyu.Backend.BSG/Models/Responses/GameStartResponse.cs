@@ -5,6 +5,6 @@ namespace Fuyu.Backend.BSG.Models.Responses;
 [DataContract]
 public class GameStartResponse
 {
-    [DataMember]
-    public double utc_time { get; set; }
+    [DataMember(Name = "utc_time")]
+    public double BackendTime { get; set; }
 }

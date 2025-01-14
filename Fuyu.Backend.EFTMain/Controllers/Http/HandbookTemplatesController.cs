@@ -1,4 +1,6 @@
 using System.Threading.Tasks;
+using Fuyu.Backend.BSG.Models.Responses;
+using Fuyu.Backend.BSG.Models.Trading;
 using Fuyu.Backend.EFTMain.Networking;
 
 namespace Fuyu.Backend.EFTMain.Controllers.Http;
@@ -16,8 +18,11 @@ public class HandbookTemplatesController : AbstractEftHttpController
     {
         // TODO: generate this
         // --seionmoya, 2024-11-18
-        var response = _eftOrm.GetHandbook();
-        var text = response.ToString();
-        return context.SendJsonAsync(text, true, true);
+        var response = new ResponseBody<HandbookTemplates>()
+        {
+            data = _eftOrm.GetHandbook()
+        };
+
+        return context.SendResponseAsync(response, true, true);
     }
 }

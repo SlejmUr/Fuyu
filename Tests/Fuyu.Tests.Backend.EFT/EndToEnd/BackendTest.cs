@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Fuyu.Backend.BSG.Models.Accounts;
@@ -11,6 +12,7 @@ using Fuyu.Backend.Core.Servers;
 using Fuyu.Backend.EFTMain;
 using Fuyu.Backend.EFTMain.Services;
 using Fuyu.Common.Hashing;
+using Fuyu.Common.IO;
 using Fuyu.Common.Serialization;
 using Fuyu.Tests.Backend.EFT.Networking;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -61,6 +63,11 @@ public class BackendTest
     [AssemblyInitialize]
     public static void AssemblyInitialize(TestContext testContext)
     {
+        if (VFS.DirectoryExists("Fuyu/"))
+        {
+            Directory.Delete("Fuyu/", true);
+        }
+
         // setup databases
         CoreLoader.Instance.Load();
         EftLoader.Instance.Load();

@@ -29,7 +29,8 @@ public class GameConfigController : AbstractEftHttpController
                     Main = "http://localhost:8010",
                     RagFair = "http://localhost:8010"
                 },
-                utc_time = DateTimeOffset.Now.ToUnixTimeMilliseconds(),
+                // TODO: update with TimeService later
+                utc_time = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() / 1000d,
                 reportAvailable = true,
                 // TODO: handle this
                 // --seionmoya, 2024-11-18

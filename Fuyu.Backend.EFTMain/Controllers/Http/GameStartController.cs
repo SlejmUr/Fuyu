@@ -18,7 +18,8 @@ public class GameStartController : AbstractEftHttpController
         {
             data = new GameStartResponse()
             {
-                BackendTime = DateTimeOffset.Now.ToUnixTimeMilliseconds()
+                // TODO: update with TimeService later
+                BackendTime = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() / 1000d
             }
         };
 

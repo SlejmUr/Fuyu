@@ -3,6 +3,7 @@ using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using Fuyu.Backend.BSG.Models.Items;
 using Fuyu.Backend.EFTMain.Networking;
+using Fuyu.Common.IO;
 using Fuyu.Common.Networking;
 using Fuyu.Common.Serialization;
 
@@ -41,10 +42,8 @@ public class GetNextFreeSlotController : AbstractEftHttpController<GetNextFreeSl
             return context.SendStatus(HttpStatusCode.InternalServerError);
         }
 
-        return context.SendJsonAsync(Json.Stringify(new
-        {
-            freeSlot,
-            gridName
-        }));
+        var json = Json.Stringify(new { freeSlot, gridName });
+        Terminal.WriteLine(json);
+        return context.SendJsonAsync(Json.Stringify(new { fuck = "you" }), true, true);
     }
 }

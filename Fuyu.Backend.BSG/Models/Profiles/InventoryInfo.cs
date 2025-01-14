@@ -111,7 +111,6 @@ public class InventoryInfo
 
     public Vector2 GetItemSize(ItemInstance root)
     {
-        var rootTemplate = _itemFactoryService.ItemTemplates[root.TemplateId];
         var rootProperties = _itemFactoryService.GetItemProperties<ItemProperties>(root.TemplateId);
         var width = rootProperties.Width;
         var height = rootProperties.Height;
@@ -128,8 +127,7 @@ public class InventoryInfo
         var children = _itemService.GetItemAndChildren(Items, root).Skip(1);
         foreach (var child in children)
         {
-            var itemTemplate = _itemFactoryService.ItemTemplates[child.TemplateId];
-            var itemProperties = _itemFactoryService.GetItemProperties<ItemProperties>(root.TemplateId);
+            var itemProperties = _itemFactoryService.GetItemProperties<ItemProperties>(child.TemplateId);
             if (itemProperties.ExtraSizeForceAdd)
             {
                 forcedUp += itemProperties.ExtraSizeUp;
@@ -168,18 +166,19 @@ public class InventoryInfo
     public LocationInGrid GetNextFreeSlot(int width, int height, out string gridName, EItemRotation desiredRotation = EItemRotation.Horizontal)
     {
         gridName = null;
+
         if (Stash == null)
         {
             return null;
         }
 
         var stashItem = Items.Find(i => i.Id == Stash.Value);
+
         if (stashItem == null)
         {
             return null;
         }
 
-        var stashItemTemplate = _itemFactoryService.ItemTemplates[stashItem.TemplateId];
         var stashItemProps = _itemFactoryService.GetItemProperties<CompoundItemItemProperties>(stashItem.TemplateId);
 
         foreach (var grid in stashItemProps.Grids)
@@ -197,8 +196,6 @@ public class InventoryInfo
                     continue;
                 }
 
-                var itemTemplate = _itemFactoryService.ItemTemplates[itemInThisGrid.TemplateId];
-                var itemProps = _itemFactoryService.GetItemProperties<ItemProperties>(itemInThisGrid.TemplateId);
                 var itemLocation = itemInThisGrid.Location.Value1;
                 var itemSize = GetItemSize(itemInThisGrid);
                 var itemWidth = itemSize.X;
@@ -220,7 +217,7 @@ public class InventoryInfo
                 }
             }
 
-            var builder = new StringBuilder(cells.Length);
+            /*var builder = new StringBuilder(cells.Length);
             for (int i = 0; i < gridHeight; i++)
             {
                 var line = cells.Skip(i * gridWidth).Take(gridWidth);
@@ -232,7 +229,7 @@ public class InventoryInfo
             }
 
             Console.Clear();
-            Terminal.WriteLine(builder.ToString());
+            Terminal.WriteLine(builder.ToString());*/
 
             for (var idx = 0; idx < cells.Length; idx++)
             {

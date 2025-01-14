@@ -87,6 +87,8 @@ public class EftMainServer : HttpServer
         HttpRouter.AddController<GameProfileNicknameChangeController>();
         HttpRouter.AddController<GetOtherProfileController>();
         HttpRouter.AddController<SearchOtherProfileController>();
+        HttpRouter.AddController<CilentRagfairFindController>();
+        HttpRouter.AddController<ClientRagfairItemMarketPriceController>();
 
         // EFT-WS
         WsRouter.AddController<PushNotiferGetWebsocketController>();

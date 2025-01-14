@@ -6,6 +6,7 @@ using Fuyu.Backend.BSG.Models.Locations;
 using Fuyu.Backend.BSG.Models.Profiles;
 using Fuyu.Backend.BSG.Models.Profiles.Info;
 using Fuyu.Backend.BSG.Models.Responses;
+using Fuyu.Backend.BSG.Models.Trading;
 using Newtonsoft.Json.Linq;
 
 namespace Fuyu.Backend.EFTMain;
@@ -499,12 +500,12 @@ public class EftOrm
         _eftDatabase.Globals.Set(globals);
     }
 
-    public JObject GetHandbook()
+    public HandbookTemplates GetHandbook()
     {
         return _eftDatabase.Handbook.Get();
     }
 
-    public void SetHandbook(JObject handbook)
+    public void SetHandbook(HandbookTemplates handbook)
     {
         _eftDatabase.Handbook.Set(handbook);
     }

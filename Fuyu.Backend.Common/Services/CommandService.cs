@@ -13,6 +13,7 @@ public class CommandService
 
     public CommandCallback OnCommand;
     public CommandCallback OnHelp;
+    public CommandCallback OnSessions;
 
     /// <summary>
     /// The construction of this class is handled in the <see cref="instance"/> (<see cref="Lazy{T}"/>)
@@ -33,11 +34,21 @@ public class CommandService
             return;
         }
 
-        if (args.Length == 1 && args[0] == "help")
+        if (args.Length == 1)
         {
-            // show help
-            OnHelp(args);
-            return;
+            switch (args[0])
+            {
+                case "help":
+                    {
+                        OnHelp(args);
+                        return;
+                    }
+                case "sessions":
+                    {
+                        OnSessions(args);
+                        return;
+                    }
+            }
         }
 
         OnCommand(args);

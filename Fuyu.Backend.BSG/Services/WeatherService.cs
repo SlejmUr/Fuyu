@@ -34,7 +34,8 @@ public class WeatherService
     {
         return new()
         {
-            Timestamp = 1731627026,
+            // TODO: update with TimeService later
+            Timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds(),
             Time = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
             Date = DateTime.Now.ToString("yyyy-MM-dd"),
             Cloud = -0.443f,

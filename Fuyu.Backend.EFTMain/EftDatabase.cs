@@ -6,6 +6,7 @@ using Fuyu.Backend.BSG.Models.Locations;
 using Fuyu.Backend.BSG.Models.Profiles;
 using Fuyu.Backend.BSG.Models.Profiles.Info;
 using Fuyu.Backend.BSG.Models.Responses;
+using Fuyu.Backend.BSG.Models.Trading;
 using Fuyu.Common.Collections;
 using Fuyu.Common.IO;
 using Newtonsoft.Json.Linq;
@@ -52,7 +53,7 @@ public class EftDatabase
     // TODO
     internal readonly ThreadObject<JObject> Achievements;
     internal readonly ThreadObject<JObject> Globals;
-    internal readonly ThreadObject<JObject> Handbook;
+    internal readonly ThreadObject<HandbookTemplates> Handbook;
     internal readonly ThreadObject<JObject> HideoutAreas;
     internal readonly ThreadObject<JObject> HideoutCustomizationOffers;
     internal readonly ThreadObject<JObject> HideoutProductionRecipes;
@@ -89,7 +90,7 @@ public class EftDatabase
         // TODO
         Achievements = new ThreadObject<JObject>(null);
         Globals = new ThreadObject<JObject>(null);
-        Handbook = new ThreadObject<JObject>(null);
+        Handbook = new ThreadObject<HandbookTemplates>(null);
         HideoutAreas = new ThreadObject<JObject>(null);
         HideoutCustomizationOffers = new ThreadObject<JObject>(null);
         HideoutProductionRecipes = new ThreadObject<JObject>(null);

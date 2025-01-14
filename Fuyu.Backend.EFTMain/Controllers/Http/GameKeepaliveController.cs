@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Fuyu.Backend.BSG.Models.Responses;
 using Fuyu.Backend.EFTMain.Networking;
@@ -20,7 +21,8 @@ public class GameKeepaliveController : AbstractEftHttpController
             data = new GameKeepaliveResponse()
             {
                 msg = "OK",
-                utc_time = 1724627853.791631
+                // TODO: update with TimeService later
+                utc_time = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() / 1000d
             }
         };
 

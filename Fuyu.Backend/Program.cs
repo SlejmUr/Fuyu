@@ -6,6 +6,7 @@ using Fuyu.Backend.Core.Servers;
 using Fuyu.Backend.EFTMain;
 using Fuyu.Common.IO;
 using Fuyu.Common.Networking;
+using Fuyu.Common.Serialization;
 using Fuyu.DependencyInjection;
 using Fuyu.Modding;
 
@@ -25,6 +26,11 @@ public class Program
         Terminal.WriteLine("Done!");
         Terminal.WriteLine("You can now run commands.");
         Terminal.WriteLine("Users can now connect.");
+
+        CommandService.Instance.OnSessions += _ =>
+        {
+            Terminal.WriteLine(Json.Stringify(EftOrm.Instance.GetSessions().Keys));
+        };
 
         while (CommandService.Instance.IsRunning)
         {

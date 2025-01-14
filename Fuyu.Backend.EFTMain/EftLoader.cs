@@ -6,6 +6,7 @@ using Fuyu.Backend.BSG.Models.Locations;
 using Fuyu.Backend.BSG.Models.Profiles;
 using Fuyu.Backend.BSG.Models.Profiles.Info;
 using Fuyu.Backend.BSG.Models.Responses;
+using Fuyu.Backend.BSG.Models.Trading;
 using Fuyu.Common.Delegates;
 using Fuyu.Common.IO;
 using Fuyu.Common.Serialization;
@@ -298,7 +299,7 @@ public class EftLoader
     private void LoadHandbook()
     {
         var json = Resx.GetText("eft", "database.client.handbook.templates.json");
-        var handbook = JObject.Parse(json);
+        var handbook = Json.Parse<HandbookTemplates>(json);
         _eftOrm.SetHandbook(handbook);
     }
 
